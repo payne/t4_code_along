@@ -8,14 +8,15 @@ export default function Board() {
   const [nextValue, setNextValue] = useState('X');
   const [theStatus, setTheStatus] = useState('Next player: X');
 
-  function handleClick(i) {
+  function handleClick(i:number) {
     if (squares[i]) return;
 
     const nextSquares = squares.slice();
-    const nv = nextValue;
-    nextValue === 'X' ? setNextValue('O') : setNextValue('X');
-    console.log('nv', nv);
+    let nv = nextValue;
     nextSquares[i] = nv;
+    console.log('nv', nv);
+    nv = nv === 'X' ? 'O' : 'X';
+    setNextValue(nv);
     setSquares(nextSquares);
 
     const winner = calculateWinner(squares);
@@ -24,7 +25,7 @@ export default function Board() {
     if (winner) {
       nextStatus = "Winner: " + winner;
     } else {
-      nextStatus = "Next player: " + nextValue
+      nextStatus = "Next player: " + nv;
     }
     setTheStatus(nextStatus);
     console.log('theStatus', theStatus);
@@ -56,7 +57,7 @@ export default function Board() {
 }
 
 
-function calculateWinner(squares) {
+function calculateWinner(squares: number[]) {
   console.log('squares', squares);
   const lines = [
     [0, 1, 2],
