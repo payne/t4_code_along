@@ -19,7 +19,7 @@ export default function Board() {
     setNextValue(nv);
     setSquares(nextSquares);
 
-    const winner = calculateWinner(squares);
+    const winner = calculateWinner(nextSquares);
     console.log('winner', winner);
     let nextStatus = '';
     if (winner) {
