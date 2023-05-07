@@ -7,9 +7,10 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [nextValue, setNextValue] = useState('X');
   const [theStatus, setTheStatus] = useState('Next player: X');
+  const [winner, setWinner] = useState(false);
 
   function handleClick(i:number) {
-    if (squares[i]) return;
+    if (squares[i] || winner) return;
 
     const nextSquares = squares.slice();
     let nv = nextValue;
@@ -19,11 +20,12 @@ export default function Board() {
     setNextValue(nv);
     setSquares(nextSquares);
 
-    const winner = calculateWinner(nextSquares);
-    console.log('winner', winner);
+    const theWinner = calculateWinner(nextSquares);
+    setWinner(!!theWinner);
+    console.log('theWinner', theWinner);
     let nextStatus = '';
-    if (winner) {
-      nextStatus = "Winner: " + winner;
+    if (theWinner) {
+      nextStatus = "Winner: " + theWinner;
     } else {
       nextStatus = "Next player: " + nv;
     }
