@@ -5,10 +5,14 @@ import Square from './square';
 
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [nextValue, setNextValue] = useState('X');
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    const nv = nextValue;
+    nextValue === 'X' ? setNextValue('O') : setNextValue('X');
+    console.log('nv', nv);
+    nextSquares[i] = nv;
     setSquares(nextSquares);
   }
 
